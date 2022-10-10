@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="styles.css">
+<script type="text/javascript" src="Abilities.js"></script>
+<script type="text/javascript" src="Code_Converter.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <form class="well form-horizontal" action=" " method="post"  id="builder_form">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Divine Conclave Character Sheet Builder</legend>
+
+<!-- Character Name Input-->
+<div class="form-group">
+  <label class="title-label">Name</label>
+  <br>  
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="first_name" placeholder="Character's Name" class="form-control"  type="text">
+</div>
+
+<!-- Character's Quote Input(Text Area)-->
+
+<div class="form-group">
+    <label class="title-label">Quote</label>
+    <br>
+    <textarea id="textarea_Quote"  name="quote" placeholder="Quote or catchprase" class="form-control"  type="text"></textarea>
+</div>
+
+<!-- Writ of Ascension Input(Text Area)-->
+
+  <div class="form-group">
+    <label class="title-label">Writ of Ascension</label>
+    <br> 
+    <textarea id="WoA" name="writ" placeholder="Titles obtained" class="form-control"  type="text"></textarea>
+  </div>
+
+<!-- Select Rank-->
+ <div class="form-group">
+  <label class="title-label">Rank</label>
+  <Select name="rank" id="rank" placeholder="Select your Rank" class="form-control"  type="text" onchange=Activate_Buttons()>
+    <option>Uninitiated</option>
+    <option>Petitioner</option>
+    <option>Pilgrim</option>
+    <option>Disciple</option>
+    <option>Paladin</option>
+    <option>Paragon</option>
+    <option>Apostle</option>
+    </Select>
+  </div>
+  <div>
+    <label class="content-label">Paragon Bonus:</label>
+    <input type="radio" name="Paragon_bonus" class="Paragon_bonus" value="HP" disabled> +1HP
+    <input type="radio" name="Paragon_bonus" class="Paragon_bonus" value="SP" disabled> +1SP
+    <input type="radio" name="Paragon_bonus" class="Paragon_bonus" value="MP" disabled> +1MP
+  </div>
+
+  <div class="form-group">
+    <label class="content-label">Participation:</label>
+    <input type="radio" name="Participation" class="Participation" value="2"> 2
+    <input type="radio" name="Participation" class="Participation" value="4"> 4
+  </div>
+
+<!-- Select Path -->
+       
+<div class="form-group">
+  <label class="title-label">Path</label>
+  <div>
+    <select name="path" placeholder="Select your Path" class="form-control" type="text">
+     <option>N/A</option>
+      <option>Mage</option>
+      <option>Warrior</option>
+     <option>Rogue</option>
+    </select>
+  </div>
+</div>
+
+<!--Prior/Curate/Priest Question--> <!--For the future if we want to give the Virtue Points Earned automatically-->
+
+<!-- <div Class="form-Group">
+  <label class="title-label">Are you a Prior/Curate/Priest?</label>
+  <div>
+    <input type="radio" name="clergy_confirmation" class="clergy_confirmation" value="yes">Yes
+    <input type="radio" name="clergy_confirmation" class="clergy_confirmation" value="no">No
+  </div>
+
+</div> -->
+
+
+<!--Virtue Points-->
+<div class="form-group">
+  <label class="title-label">Virtue Points</label>
+  <br>
+  <!-- <label class="content-label">Points earned:</label><span id="virtue-points">0</span>
+  <br> -->
+  <label class="content-label">Fortitude: </label>
+  <input type="number" name="Fortitude" class="virtue-assigned" min="0" max="5" value="0">
+  <br>
+  <label class="content-label">Cunning: </label>
+  <input type="number" name="fortitude" class="virtue-assigned" min="0" max="5" value="0">
+  <br>
+  <label class="content-label">Judgement: </label>
+  <input type="number" name="Judgement" class="virtue-assigned" min="0" max="5" value="0">
+  <br>
+  <label class="title-label">GIVES</label>
+  <input type="checkbox" name="GIVES" class="GIVES-checkbox"> Fortitude
+  <input type="checkbox" name="GIVES" class="GIVES-checkbox"> Cunning
+  <input type="checkbox" name="GIVES" class="GIVES-checkbox"> Judgement
+  <br>
+</div>
+
+<!-- Select Disciple Ability -->
+   
+<div class="form-group"> 
+  <label class="title-label">Disciple Ability</label>
+    <select id="disciple_ability" class="form-control selectpicker" onChange=getAbilityDisciple()>
+    </select>
+    <div id="DiscipleAbility_display"></div>
+    <p>
+            <div id="DA_name">Name:</div>
+            <br>
+            <div id="DA_description">Description:</div>
+            <br>
+            <div id="DA_cost">Cost:</div>
+            <br>
+            <div id="DA_requirement">Requirement:</div>
+            <br>
+            <div id="DA_type">Type:</div>
+    </p>
+</div>
+
+<!-- Select Paladin Ability-->
+<div class="form-group"> 
+  <label class="title-label">Paladin Ability</label>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select id="paladin_ability" class="form-control selectpicker" onChange=getAbilityPaladin()>
+    </select>
+    <div id="PaladinAbility_display"></div>
+    <p>
+            <div id="PA_name">Name:</div>
+            <br>
+            <div id="PA_description">Description:</div>
+            <br>
+            <div id="PA_cost">Cost:</div>
+            <br>
+            <div id="PA_requirement">Requirement:</div>
+            <br>
+            <div id="PA_type">Type:</div>
+    </p>
+</div>
+
+
+<!--Select Calling Ability-->
+
+<div class="form-group"> 
+  <label class="title-label">Calling Ability</label>
+    <select id="calling_ability" class="form-control selectpicker" onChange=getAbilityCalling()>
+    </select>
+    <div id="CallingAbility_display"></div>
+    <p>
+            <div id="CA_name">Name:</div>
+            <br>
+            <div id="CA_description">Description:</div>
+            <br>
+            <div id="CA_cost">Cost:</div>
+            <br>
+            <div id="CA_requirement">Requirement:</div>
+            <br>
+            <div id="CA_type">Type:</div>
+    </p>
+</div>
+
+<!-- Select Mundus Stone-->
+<div class="form-group">
+  <label class="title-label">Mundus Stone:</label>
+  <Select name="mundus" id="mundus_ability" placeholder="Select your Constellation" class="form-control"  type="text" onchange=getAbilityMundus()>
+    </Select>
+    <div id="MundusAbility_display"></div>
+    <p>
+            <div id="MA_name">Constellation:</div>
+            <br>
+            <div id="MA_effect">Effect:</div>
+    </p>
+    Quest Overseer: <input id="quest_overseer_input"></input><br>
+    <br>
+    Date: <input type="date" id="date_mundus_input"></input>
+    <br>
+</div>
+
+<!-- Select Forge Item-->
+<div class="form-group">
+  <label class="title-label">Forge Item</label>
+  <br>
+  Item: 
+  <input type="text" placeholder="eg: sword, wand, book, etc.">
+  <br>
+        <br>
+  Ability: <Select name="forge" id="forge_ability" placeholder="Select your Holy Item Effect" class="form-control"  type="text" onchange=getAbilityForge()>
+    </Select>
+
+        <div id="ForgeAbility_display"></div>
+    <p>
+            <div id="FA_name">Constellation:</div>
+            <br>
+            <div id="FA_effect">Effect:</div>
+            <br>
+            <div>Holy Number: <input type="number" id="FA_number" min="1" max="20" value="1"></div>
+            <br>
+            <div id="FA_proc"> Proc:</div>
+    </p>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" class="btn-create-character-sheet">Send <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+</form>
+</div>
+    </div><!-- /.container -->
+</body>
+</fieldset>
+</div>
+
+<!---Paragon Bonus Activators-->
+<script>
+  function Activate_Buttons()
+  {
+    var elems = document.getElementsByClassName("Paragon_bonus");
+    if (document.getElementById("rank").value === "Paragon" || document.getElementById("rank").value === "Apostle")
+      {
+          for(var i = 0; i < elems.length; i++) 
+          {
+              elems[i].disabled = false;
+          }
+      }
+
+      else 
+      {
+          for(var i = 0; i < elems.length; i++) 
+          {
+              elems[i].disabled = true;
+          }
+      }
+  }
+</script>
+
+<!--Creating Variable to save the data-->
+<script>  $(document).ready(function () {
+  var personaje;
+});</script>
+
+<!--Getting Abilities Information-->
+<script>
+
+  function getAbilityDisciple(){
+     var text= getAbilityInfo(document.getElementById("disciple_ability").value, "general");
+     document.getElementById("DA_name").textContent= "Name: " + text.Name;
+     document.getElementById("DA_description").textContent= "Description: " + text.Description;
+     document.getElementById("DA_cost").textContent= "Cost: " + text.Cost;
+     document.getElementById("DA_requirement").textContent= "Requirement: " + text.Requirement;
+     document.getElementById("DA_type").textContent = "Type: " + text.Type;
+     
+  }</script>
+
+<script>
+  function getAbilityPaladin(){
+     var text= getAbilityInfo(document.getElementById("paladin_ability").value, "general");
+     document.getElementById("PA_name").textContent= "Name: " + text.Name;
+     document.getElementById("PA_description").textContent= "Description: " + text.Description;
+     document.getElementById("PA_cost").textContent= "Cost: " + text.Cost;
+     document.getElementById("PA_requirement").textContent= "Requirement: " + text.Requirement;
+     document.getElementById("PA_type").textContent = "Type: " + text.Type;
+     
+  }</script>
+
+<script>
+  function getAbilityCalling(){
+     var text= getAbilityInfo(document.getElementById("calling_ability").value, "calling");
+     document.getElementById("CA_name").textContent= "Name: " + text.Name;
+     document.getElementById("CA_description").textContent= "Description: " + text.Description;
+     document.getElementById("CA_cost").textContent= "Cost: " + text.Cost;
+     document.getElementById("CA_requirement").textContent= "Requirement: " + text.Requirement;
+     document.getElementById("CA_type").textContent = "Type: " + text.Type;
+  }</script>
+
+<script>
+  function getAbilityMundus(){
+     var text= getAbilityInfo(document.getElementById("mundus_ability").value, "mundus");
+     document.getElementById("MA_name").textContent = "Constellation: " + text.Name;
+     document.getElementById("MA_effect").textContent = "Effect: " + text.Effect;
+  }</script>
+
+<script>
+  function getAbilityForge(){
+     var texto= getAbilityInfo(document.getElementById("forge_ability").value, "forge");
+     document.getElementById("FA_name").textContent = "Name: " +texto.Name;
+     document.getElementById("FA_effect").textContent = "Effect: " + texto.Effect;
+     document.getElementById("FA_proc").textContent = "Proc: " + texto.Proc;
+  }</script>
+
+
+<!--Creating Selects's Options-->
+<script>
+  var select = document.getElementById("disciple_ability"); 
+  var options = getAllGeneralAbilitiesNames();
+
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+
+    var el = document.createElement("option");
+    el.text = opt;
+    el.value = opt;
+
+    select.add(el);
+}
+
+</script>
+
+<script>
+  var select = document.getElementById("paladin_ability"); 
+  var options = getAllGeneralAbilitiesNames();
+
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+
+    var el = document.createElement("option");
+    el.text = opt;
+    el.value = opt;
+
+    select.add(el);
+}
+</script>
+
+<script>
+  var select = document.getElementById("calling_ability"); 
+  var options = getAllCallingAbilitiesNames();
+
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+
+    var el = document.createElement("option");
+    el.text = opt;
+    el.value = opt;
+
+    select.add(el);
+}
+</script>
+
+<script>
+  var select = document.getElementById("mundus_ability"); 
+  var options = getAllMundusAbilitiesNames();
+
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+
+    var el = document.createElement("option");
+    el.text = opt;
+    el.value = opt;
+
+    select.add(el);
+}
+</script>
+
+<script>
+  var select = document.getElementById("forge_ability"); 
+  var options = getAllForgeAbilitiesNames();
+
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+
+    var el = document.createElement("option");
+    el.text = opt;
+    el.value = opt;
+
+    select.add(el);
+}
+</script>
+
+<!--TextAreas Resize-->
+<script>
+  const textarea = document.getElementById("WoA");
+
+textarea.addEventListener("input", function (e) {
+  this.style.height = "auto";
+  this.style.height = this.scrollHeight + "px";
+});
+</script>
+
+<script>
+  const textareaQ = document.getElementById("textarea_Quote");
+
+textareaQ.addEventListener("input", function (e) {
+  this.style.height = "auto";
+  this.style.height = this.scrollHeight + "px";
+});
+</script>
