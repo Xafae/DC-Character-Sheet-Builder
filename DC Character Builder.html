@@ -227,8 +227,9 @@
 </fieldset>
 </div>
 
-<!---Paragon Bonus Activators-->
 <script>
+//<!---Paragon Bonus Activators-->
+
   function Activate_Buttons()
   {
     var elems = document.getElementsByClassName("Paragon_bonus");
@@ -248,15 +249,15 @@
           }
       }
   }
-</script>
 
-<!--Creating Variable to save the data-->
-<script>  $(document).ready(function () {
+
+//<!--Creating Variable to save the data-->
+  $(document).ready(function () {
   var personaje;
-});</script>
+});
 
-<!--Getting Abilities Information-->
-<script>
+//<!--Getting Abilities Information-->
+
 
   function getAbilityDisciple(){
      var text= getAbilityInfo(document.getElementById("disciple_ability").value, "general");
@@ -266,9 +267,9 @@
      document.getElementById("DA_requirement").textContent= "Requirement: " + text.Requirement;
      document.getElementById("DA_type").textContent = "Type: " + text.Type;
      
-  }</script>
+  }
 
-<script>
+
   function getAbilityPaladin(){
      var text= getAbilityInfo(document.getElementById("paladin_ability").value, "general");
      document.getElementById("PA_name").textContent= "Name: " + text.Name;
@@ -277,9 +278,9 @@
      document.getElementById("PA_requirement").textContent= "Requirement: " + text.Requirement;
      document.getElementById("PA_type").textContent = "Type: " + text.Type;
      
-  }</script>
+  }
 
-<script>
+
   function getAbilityCalling(){
      var text= getAbilityInfo(document.getElementById("calling_ability").value, "calling");
      document.getElementById("CA_name").textContent= "Name: " + text.Name;
@@ -287,26 +288,25 @@
      document.getElementById("CA_cost").textContent= "Cost: " + text.Cost;
      document.getElementById("CA_requirement").textContent= "Requirement: " + text.Requirement;
      document.getElementById("CA_type").textContent = "Type: " + text.Type;
-  }</script>
+  }
 
-<script>
+
   function getAbilityMundus(){
      var text= getAbilityInfo(document.getElementById("mundus_ability").value, "mundus");
      document.getElementById("MA_name").textContent = "Constellation: " + text.Name;
      document.getElementById("MA_effect").textContent = "Effect: " + text.Effect;
-  }</script>
+  }
 
-<script>
+
   function getAbilityForge(){
      var texto= getAbilityInfo(document.getElementById("forge_ability").value, "forge");
      document.getElementById("FA_name").textContent = "Name: " +texto.Name;
      document.getElementById("FA_effect").textContent = "Effect: " + texto.Effect;
      document.getElementById("FA_proc").textContent = "Proc: " + texto.Proc;
-  }</script>
+  }
 
 
-<!--Creating Selects's Options-->
-<script>
+//<!--Creating Selects's Options-->
   var select = document.getElementById("disciple_ability"); 
   var options = getAllGeneralAbilitiesNames();
 
@@ -320,9 +320,6 @@ for(var i = 0; i < options.length; i++) {
     select.add(el);
 }
 
-</script>
-
-<script>
   var select = document.getElementById("paladin_ability"); 
   var options = getAllGeneralAbilitiesNames();
 
@@ -335,9 +332,7 @@ for(var i = 0; i < options.length; i++) {
 
     select.add(el);
 }
-</script>
 
-<script>
   var select = document.getElementById("calling_ability"); 
   var options = getAllCallingAbilitiesNames();
 
@@ -350,9 +345,7 @@ for(var i = 0; i < options.length; i++) {
 
     select.add(el);
 }
-</script>
 
-<script>
   var select = document.getElementById("mundus_ability"); 
   var options = getAllMundusAbilitiesNames();
 
@@ -365,9 +358,7 @@ for(var i = 0; i < options.length; i++) {
 
     select.add(el);
 }
-</script>
 
-<script>
   var select = document.getElementById("forge_ability"); 
   var options = getAllForgeAbilitiesNames();
 
@@ -380,19 +371,16 @@ for(var i = 0; i < options.length; i++) {
 
     select.add(el);
 }
-</script>
 
-<!--TextAreas Resize-->
-<script>
+
+// <!--TextAreas Resize-->
   const textarea = document.getElementById("WoA");
 
 textarea.addEventListener("input", function (e) {
   this.style.height = "auto";
   this.style.height = this.scrollHeight + "px";
 });
-</script>
 
-<script>
   const textareaQ = document.getElementById("textarea_Quote");
 
 textareaQ.addEventListener("input", function (e) {
